@@ -1,5 +1,6 @@
 package com.example.tugasapi
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -34,18 +35,22 @@ class MainActivity : AppCompatActivity() {
 
                 if(datas.isNotEmpty()) {
                     for(i in datas){
-                        val characterData = CharacterData(i.name, i.species, i.image)
+                        val characterData = CharacterData(i.id ,i.name, i.species, i.image)
                         characterList.add(characterData)
                     }
                     with(binding) {
                         recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
                         recyclerView.setHasFixedSize(true)
 
-                        val adapter = CharacterAdapter(this@MainActivity,characterList)
+                        val adapter = CharacterAdapter(characterList)
                         recyclerView.adapter = adapter
                         adapter.setOnItemClickListener(object : CharacterAdapter.onItemClickListener{
                             override fun onItemClick(position: Int) {
-                                println("tes")
+                                Toast.makeText(this@MainActivity,"You Clicked ${characterList[position].name}", Toast.LENGTH_SHORT).show()
+                                val intent = Intent(this@MainActivity, DetailsActivity::class.java)
+                                intent.putExtra("EXTID", characterList[position].id)
+                                startActivity(intent)
+                                finish()
                             }
 
                         })

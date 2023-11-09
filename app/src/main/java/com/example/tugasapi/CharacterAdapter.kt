@@ -1,6 +1,5 @@
 package com.example.tugasapi
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.tugasapi.Models.CharacterData
 
 
-class CharacterAdapter(private val context : Context ,private val characterList : ArrayList<CharacterData>):
+class CharacterAdapter(private val characterList : ArrayList<CharacterData>):
     RecyclerView.Adapter<CharacterAdapter.MyViewHolder>() {
 
     private lateinit var mListener: onItemClickListener
@@ -25,7 +24,7 @@ class CharacterAdapter(private val context : Context ,private val characterList 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.movies_items, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.character_layout, parent, false)
 
         return MyViewHolder(itemView, mListener)
     }
@@ -41,6 +40,7 @@ class CharacterAdapter(private val context : Context ,private val characterList 
         Glide.with(holder.characterImage)
             .load(currentItem.image)
             .centerCrop()
+            .placeholder(R.drawable.placeholder_image)
             .into(holder.characterImage)
     }
 

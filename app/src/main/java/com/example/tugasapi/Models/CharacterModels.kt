@@ -8,6 +8,8 @@ data class CharacterModels(
 )
 
 data class CharacterData(
+    @SerializedName("id")
+    val `id` : Int,
     @SerializedName("name")
     val `name` : String,
     @SerializedName("species")
